@@ -9,8 +9,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         
         String response;
-        String list[] = new String[100];
-        int responseCount = 0;
+        Task tasks[] = new Task[100];
+        int taskCount = 1;
 
         Scanner in = new Scanner(System.in);
 
@@ -19,25 +19,45 @@ public class Duke {
         System.out.println("Hello! I'm Bob\nWhat can I do for you?");
         while (true){
             response = in.nextLine();
-            responseCount++;
 
-            if (response.equals("bye")){
+            if (response.equals("bye")){ //bye
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
 
-            else if (response.equals("list")){
+            else if (response.equals("list")){ //list
                 int i=1;
-                while (i<responseCount){
-                    System.out.println(i + ". " + list[i]);
+                while (i<taskCount){
+                    System.out.println("[" + tasks[i].getStatusIcon() + "] " + tasks[i].description);
                     i++;
                 }
             }
-            else{
-                System.out.println(response);
-                list[responseCount]=response;
+
+            else if (response.startsWith("mark")){ //mark
+                int taskIndex=Integer.parseInt(response.split(" ")[1]);
+                if (taskIndex <= taskCount && taskIndex > 0) {
+                    tasks[taskIndex].markDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("[" + tasks[taskIndex].getStatusIcon() + "] " + tasks[taskIndex].description);
+                }                
+            }
+
+            else if (response.startsWith("unmark")){ //unmark
+                int taskIndex=Integer.parseInt(response.split(" ")[1]);
+                if (taskIndex <= taskCount && taskIndex > 0) {
+                    tasks[taskIndex].unmarkDone();
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println("[" + tasks[taskIndex].getStatusIcon() + "] " + tasks[taskIndex].description);
+                }
+            }
+
+            else{ //add task
+                System.out.println("added:" + response);
+                tasks[taskCount]=new Task(response);
+                taskCount++;
             }
         }
         
     }
 }
+
