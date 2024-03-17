@@ -40,7 +40,7 @@ public class Duke {
                     tasks[taskIndex-1].markDone();
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println(tasks[taskIndex-1].toString());
-                }                
+                }          
             }
 
             else if (response.startsWith("unmark")){ //unmark
@@ -53,6 +53,10 @@ public class Duke {
             }
 
             else if (response.startsWith("todo")){ //todo
+                String tline = response.substring(4);
+                if (tline.length()==0){
+                    throw new IndexOutOfBoundsException("! The description of a todo cannot be empty.");
+                }
                 Todo t = new Todo(response.substring(4));
                 tasks[taskCount] = t;
                 taskCount++;
@@ -93,6 +97,7 @@ public class Duke {
                 // System.out.println("added: " + response); 
                 // tasks[taskCount]=new Task(response);
                 // taskCount++;
+                throw new IndexOutOfBoundsException("? I'm sorry, but I don't know what that means :^(");
                 
             }
         }
