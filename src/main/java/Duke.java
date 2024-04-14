@@ -92,6 +92,18 @@ public class Duke {
                 System.out.println("Got it. I've added this task:\n" + d.toString()); 
                 System.out.println("Now you have " + taskCount + " tasks in the list.");
             }
+            else if (response.startsWith("delete")){
+                int delIndex = Integer.parseInt(response.split(" ")[1]);
+                Task deletedTask = tasks[delIndex-1];
+                if (delIndex <= taskCount && delIndex > 0) {
+                    for (int i = delIndex - 1; i < taskCount - 1; i++) {
+                        tasks[i] = tasks[i + 1];
+                    }
+                    taskCount--;
+                    System.out.println("Noted. I've removed this task:\n" + deletedTask.toString()); 
+                    System.out.println("Now you have " + taskCount + " tasks in the list.");
+                }
+            }
 
             else{ // don't add task
                 // System.out.println("added: " + response); 
