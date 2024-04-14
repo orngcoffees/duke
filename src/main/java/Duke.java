@@ -1,7 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+
 public class Duke {
+    public static List<Task> taskList = new ArrayList<>();
     public static void main(String[] args) {
+        
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,6 +16,12 @@ public class Duke {
         String response;
         Task tasks[] = new Task[100];
         int taskCount = 0;
+
+        int c=0;
+            while (c<taskCount){
+                taskList.add(tasks[taskCount]);
+                c++;
+            }
 
         Scanner in = new Scanner(System.in);
 
@@ -60,8 +71,9 @@ public class Duke {
                 Todo t = new Todo(response.substring(4));
                 tasks[taskCount] = t;
                 taskCount++;
+                taskList.add(t);
                 System.out.println("Got it. I've added this task:\n" + t.toString()); 
-                System.out.println("Now you have " + taskCount + " tasks in the list.");   
+                System.out.println("Now you have " + taskCount + " tasks in the list."); 
             }
 
             else if (response.startsWith("event")){ //event
@@ -75,6 +87,7 @@ public class Duke {
                 Event e = new Event(description, startsAt, endsAt);
 
                 tasks[taskCount] = e;
+                taskList.add(e);
                 taskCount++;
                 System.out.println("Got it. I've added this task:\n" + e.toString()); 
                 System.out.println("Now you have " + taskCount + " tasks in the list.");
@@ -88,6 +101,7 @@ public class Duke {
                 Deadline d = new Deadline(description, by);
 
                 tasks[taskCount] = d;
+                taskList.add(d);
                 taskCount++;
                 System.out.println("Got it. I've added this task:\n" + d.toString()); 
                 System.out.println("Now you have " + taskCount + " tasks in the list.");
@@ -103,6 +117,7 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:\n" + deletedTask.toString()); 
                     System.out.println("Now you have " + taskCount + " tasks in the list.");
                 }
+                taskList.remove(delIndex-1);
             }
 
             else{ // don't add task
@@ -113,7 +128,7 @@ public class Duke {
                 
             }
         }
-        
+        Storage.main();
     }
 }
 
