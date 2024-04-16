@@ -2,12 +2,25 @@ package parser;
 
 import commands.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
+    public static String formatDateFromString(String dateString){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        LocalDateTime d1 = LocalDateTime.parse(dateString, formatter);
+
+        System.out.println(d1); // -> 2019-10-15
+        //System.out.println(d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm"));
+
+    }
     public static Command parse(String command) {
         String description;
-        String by;
+        //String by;
         String startsAt;
         String endsAt;
+        String dateString;
 
         String[] inputArray = command.split(" ");
         String identifier = inputArray[0];
@@ -33,9 +46,12 @@ public class Parser {
             case "deadline":
                 firstSlashIndex = command.indexOf("/");
                 description = command.substring(8,firstSlashIndex);
-                by = command.substring(firstSlashIndex+4);
+                dateString = command.substring(firstSlashIndex+4);
+                String byDate = formatDateFromString(dateString);
 
-                return new DeadlineCommand(description,by);
+                //by = command.substring(firstSlashIndex+4);
+
+                return new DeadlineCommand(description,byDate);
 
             case "bye":
                 return new ByeCommand();
