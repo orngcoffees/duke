@@ -61,6 +61,15 @@ public class TaskList {
                 tasks.get(tasks.size()-1).markDone();
             }
         }
+
+        else if (identifier.equals("F")){
+            String duration = inputArray[3];
+            tasks.add(new FixedDurationTask(description,duration));
+
+            if(isDone.equals("1")) {
+                tasks.get(tasks.size()-1).markDone();
+            }
+        }
         
 
         return tasks;

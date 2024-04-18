@@ -52,6 +52,13 @@ public class Parser {
                 //by = command.substring(firstSlashIndex+4);
 
                 return new DeadlineCommand(description,byDate);
+            
+            case "fixed":
+                firstSlashIndex = command.indexOf("/");
+                description = command.substring(5,firstSlashIndex);
+                String duration = command.substring(firstSlashIndex+7);
+
+                return new FixedDurationCommand(description,duration);
 
             case "bye":
                 return new ByeCommand();

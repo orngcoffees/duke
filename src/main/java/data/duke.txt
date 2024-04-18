@@ -3,3 +3,4 @@ D | 0 | return book | June 6th
 E | 0 | project meeting | Aug 6th 2pm 4pm
 T | 1 | join sports club
 D | 0 |  return book  | Dec 12 2019 06:00
+F | 0 |  reading sales report  | 2 hours
