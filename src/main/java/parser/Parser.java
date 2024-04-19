@@ -77,6 +77,10 @@ public class Parser {
             case "delete":
                 String delIndex = inputArray[1];
                 return new DeleteCommand(delIndex);
+
+            case "find":
+                String toFind = inputArray[1];
+                return new FindCommand(toFind);
         }
         return null;
     }
