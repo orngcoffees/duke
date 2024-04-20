@@ -1,6 +1,7 @@
-T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2pm 4pm
-T | 1 | join sports club
-D | 0 |  return book  | Dec 12 2019 06:00
-F | 0 |  reading sales report  | 2 hours
+T | 0 | send party invitations
+D | 0 |  confirm guest reservations  | May 5 2024 06:00pm
+E | 0 |  my birthday party  | Aug 6th 2pm 4pm
+D | 0 |  submit project report  | May 30 2024 11:59pm
+F | 0 |  review lecture notes  | 2 hours
+T | 0 | study for popquiz
+D | 0 | confirm guest reservations  | May 5 2024 06:00pm

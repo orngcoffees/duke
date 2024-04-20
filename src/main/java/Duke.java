@@ -58,6 +58,7 @@ public class Duke {
             try {
                 String response = ui.readCommand();
                 Command c = Parser.parse(response);
+                ui.print("__________________________________________");
                 c.execute(tasks, ui, storage);
                 ui.print("__________________________________________");
                 exit = c.isExit();

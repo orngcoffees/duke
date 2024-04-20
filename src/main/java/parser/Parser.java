@@ -15,8 +15,8 @@ public class Parser {
     public static String formatDateFromString(String dateString){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         LocalDateTime d1 = LocalDateTime.parse(dateString, formatter);
-        
-        return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm"));
+
+        return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
 
     }
     public static Command parse(String command) {
@@ -38,7 +38,7 @@ public class Parser {
 
             case "event":
                 int firstSlashIndex = command.indexOf("/");
-                description = command.substring(5,firstSlashIndex);
+                description = command.substring(6,firstSlashIndex);
 
                 String[] atTimes = command.split("/");
                 startsAt = atTimes[1].replace("from ", ""); 
@@ -48,7 +48,7 @@ public class Parser {
 
             case "deadline":
                 firstSlashIndex = command.indexOf("/");
-                description = command.substring(8,firstSlashIndex);
+                description = command.substring(9,firstSlashIndex);
                 dateString = command.substring(firstSlashIndex+4);
                 String byDate = formatDateFromString(dateString);
 
@@ -56,7 +56,7 @@ public class Parser {
             
             case "fixed":
                 firstSlashIndex = command.indexOf("/");
-                description = command.substring(5,firstSlashIndex);
+                description = command.substring(6,firstSlashIndex);
                 String duration = command.substring(firstSlashIndex+7);
 
                 return new FixedDurationCommand(description,duration);

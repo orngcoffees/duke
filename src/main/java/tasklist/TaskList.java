@@ -48,7 +48,7 @@ public class TaskList {
         else if (identifier.equals("E")) {
             String[] atTimes = inputArray[3].split(" ");
 
-            tasks.add(new Event(description,atTimes[0]+" "+atTimes[1]," "+ atTimes[2]+" "+atTimes[3]));
+            tasks.add(new Event(description,atTimes[0]+" "+atTimes[1]+" "+ atTimes[2]," "+ atTimes[3]));
 
             if(isDone.equals("1")) {
                 tasks.get(tasks.size()-1).markDone();
