@@ -4,6 +4,15 @@ import storage.Storage;
 import tasklist.*;
 import ui.Ui;
 
+/**
+ * Represents a specific command to remove a created task from the tasklist.
+ * Delete commands start with the keyword "delete", followed by the task index to be deleted.
+ * 
+ * @param delIndex The index of the task to be deleted
+ * 
+ * @see Command
+ */
+
 public class DeleteCommand extends Command {
     int delIndex;
 

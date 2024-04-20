@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Represents a tasklist which stores an arraylist of tasks.
+ */
 public class TaskList {
     public ArrayList<Task> tasks = new ArrayList<Task>();
 

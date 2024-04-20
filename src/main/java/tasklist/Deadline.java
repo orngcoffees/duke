@@ -1,4 +1,10 @@
 package tasklist;
+
+/**
+ * Represents a specific task of type Deadline.
+ * 
+ * @see Task
+ */
 public class Deadline extends Task {
 
     protected String by;

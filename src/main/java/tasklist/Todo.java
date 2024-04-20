@@ -1,4 +1,10 @@
 package tasklist;
+
+/**
+ * Represents a specific task of type Todo.
+ * 
+ * @see Task
+ */
 public class Todo extends Task {
 
     protected String by;

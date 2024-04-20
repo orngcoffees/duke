@@ -4,6 +4,13 @@ import storage.Storage;
 import tasklist.*;
 import ui.Ui;
 
+/**
+ * Represents a specific command to list all tasks in the tasklist in a specific format.
+ * List commands start with the keyword "list".
+ * 
+ * @see Command
+ */
+
 public class ListCommand extends Command{
 
     @Override

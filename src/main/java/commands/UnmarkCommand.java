@@ -4,6 +4,15 @@ import storage.Storage;
 import tasklist.*;
 import ui.Ui;
 
+/**
+ * Represents a specific command to unmark a certain task as completed (marks it as not completed again).
+ * Unmark commands start with the keyword "unmark", followed by the index of the task to be unmarked.
+ * 
+ * @param markIndex The index of the task to be unmarked completed/
+ * 
+ * @see Command
+ */
+
 public class UnmarkCommand extends Command{
     int unmarkIndex;
 

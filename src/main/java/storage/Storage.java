@@ -7,6 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a Storage class which is used to storing the tasklist in the hard disk.
+ * Used for loading current tasklist during initialisation and real-time updating
+ * of new tasks when they are added.
+ */
 
 public class Storage {
     private static File file;

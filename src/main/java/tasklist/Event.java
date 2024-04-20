@@ -1,4 +1,10 @@
 package tasklist;
+
+/**
+ * Represents a specific task of type Event.
+ * 
+ * @see Task
+ */
 public class Event extends Task {
 
     protected String startsAt;

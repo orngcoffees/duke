@@ -7,6 +7,16 @@ import tasklist.Task;
 import tasklist.TaskList;
 import ui.Ui;
 
+/**
+ * Represents a specific command to find a keyword in the tasklist.
+ * Searches through all tasks in the tasklist.
+ * Find commands start with the keyword "find", followed by the word to find.
+ * 
+ * @param toFind The string to search for within the tasklist.
+ * 
+ * @see Command
+ */
+
 public class FindCommand extends Command{
     String toFind;
 

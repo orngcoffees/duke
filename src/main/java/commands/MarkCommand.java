@@ -4,6 +4,15 @@ import storage.Storage;
 import tasklist.*;
 import ui.Ui;
 
+/**
+ * Represents a specific command to mark a certain task as completed
+ * Mark commands start with the keyword "mark", followed by the index of the task to be marked completed.
+ * 
+ * @param markIndex The index of the task to be marked completed/
+ * 
+ * @see Command
+ */
+
 public class MarkCommand extends Command{
     int markIndex;
     public MarkCommand(String index){

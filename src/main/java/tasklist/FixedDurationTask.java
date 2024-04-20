@@ -1,5 +1,11 @@
 package tasklist;
 
+/**
+ * Represents a specific task of type FixedDuration.
+ * 
+ * @see Task
+ */
+
 public class FixedDurationTask extends Task {
 
     protected String duration;

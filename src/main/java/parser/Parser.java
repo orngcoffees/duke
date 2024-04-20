@@ -5,19 +5,22 @@ import commands.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a parser which will take the user input, read and execute the corresponding 
+ * commands.
+ * 
+ */
+
 public class Parser {
     public static String formatDateFromString(String dateString){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         LocalDateTime d1 = LocalDateTime.parse(dateString, formatter);
-
-        System.out.println(d1); // -> 2019-10-15
-        //System.out.println(d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        
         return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm"));
 
     }
     public static Command parse(String command) {
         String description;
-        //String by;
         String startsAt;
         String endsAt;
         String dateString;
@@ -48,8 +51,6 @@ public class Parser {
                 description = command.substring(8,firstSlashIndex);
                 dateString = command.substring(firstSlashIndex+4);
                 String byDate = formatDateFromString(dateString);
-
-                //by = command.substring(firstSlashIndex+4);
 
                 return new DeadlineCommand(description,byDate);
             

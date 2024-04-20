@@ -4,10 +4,21 @@ import storage.Storage;
 import tasklist.*;
 import ui.Ui;
 
+/**
+ * Represents a specific command to create a Task of type Todo
+ * and add the task to the tasklist. 
+ * Deadline commands start with the keyword "todo".
+ * 
+ * @param description The exact task.
+
+ * @see Command
+ */
 
 public class TodoCommand extends Command{
     String description;
-
+    /**
+     * Create TodoCommand
+     */
     public TodoCommand(String description){
     this.description=description;
     }
