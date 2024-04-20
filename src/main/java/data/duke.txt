@@ -4,4 +4,4 @@ E | 0 |  my birthday party  | Aug 6th 2pm 4pm
 D | 0 |  submit project report  | May 30 2024 11:59pm
 F | 0 |  review lecture notes  | 2 hours
 T | 0 | study for popquiz
-D | 0 | confirm guest reservations  | May 5 2024 06:00pm
+D | 1 | confirm guest reservations  | May 5 2024 06:00pm

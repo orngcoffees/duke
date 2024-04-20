@@ -3,6 +3,7 @@ package commands;
 import storage.Storage;
 import tasklist.*;
 import ui.Ui;
+import exceptions.*;
 
 /**
  * Represents a specific command to mark a certain task as completed
@@ -18,10 +19,16 @@ public class MarkCommand extends Command{
     public MarkCommand(String index){
         markIndex = Integer.parseInt(index)-1;
     }
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task markedTask = tasks.tasks.get(markIndex);
-        markedTask.markDone();
-        ui.print("Nice! I've marked this task as done:\n"+markedTask.toString());
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IllegalIndexException {
+        
+        try{
+            Task markedTask = tasks.tasks.get(markIndex);
+            markedTask.markDone();
+            ui.print("Nice! I've marked this task as done:\n"+markedTask.toString());
+        } catch (IndexOutOfBoundsException e){
+            throw new IllegalIndexException();
+        }
 
         try {
             storage.writeToFile(tasks.tasks);

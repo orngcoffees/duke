@@ -1,5 +1,5 @@
 import commands.*;
-import exceptions.DukeExceptions;
+import exceptions.*;
 import parser.Parser;
 import storage.Storage;
 import tasklist.*;
@@ -48,7 +48,7 @@ public class Duke {
     * <p>
     * Reads user commands upon initialisation.
     */  
-    public void run() {
+    public void run() throws DukeException, IllegalIndexException {
         ui.printLogo();
         ui.printHello();
         ui.print("__________________________________________");
@@ -63,8 +63,9 @@ public class Duke {
                 ui.print("__________________________________________");
                 exit = c.isExit();
 
-            } catch (IndexOutOfBoundsException e) {
-                ui.print(e.getMessage());
+            } catch (DukeException e) {
+                ui.print(e.getErrorMessage());
+                ui.print("__________________________________________");
             } 
         }
 
@@ -73,7 +74,11 @@ public class Duke {
     * The method which runs to check existing storage.
     */  
     public static void main(String[] args) {
-        new Duke("../Duke/src/main/java/data/duke.txt").run();
+        try {
+            new Duke("../Duke/src/main/java/data/duke.txt").run();
+        } catch (DukeException e) {
+            e.getErrorMessage();
+        }
 
     }
 }

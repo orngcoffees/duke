@@ -1,9 +1,12 @@
 package parser;
 
 import commands.*;
+import exceptions.*;
+import tasklist.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a parser which will take the user input, read and execute the corresponding 
@@ -12,14 +15,19 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Parser {
-    public static String formatDateFromString(String dateString){
+    public static String formatDateFromString(String dateString) throws IllegalDateTimeException{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        LocalDateTime d1 = LocalDateTime.parse(dateString, formatter);
 
-        return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
+        try{
+            LocalDateTime deadlineDateTime = LocalDateTime.parse(dateString, formatter);
+            return deadlineDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
+
+        } catch (DateTimeParseException e) {
+            throw new IllegalDateTimeException();
+        }
 
     }
-    public static Command parse(String command) {
+    public static Command parse(String command) throws MissingInputException, IllegalDateTimeException, IllegalIndexException {
         String description;
         String startsAt;
         String endsAt;
@@ -29,6 +37,9 @@ public class Parser {
         String identifier = inputArray[0];
 
         switch (identifier) {
+            case "":
+                throw new MissingInputException();
+
             case "todo":
                 description = command.split("todo ")[1];
                 if (description.length()==0){
@@ -49,11 +60,14 @@ public class Parser {
             case "deadline":
                 firstSlashIndex = command.indexOf("/");
                 description = command.substring(9,firstSlashIndex);
-                dateString = command.substring(firstSlashIndex+4);
-                String byDate = formatDateFromString(dateString);
-
-                return new DeadlineCommand(description,byDate);
-            
+                try{
+                    dateString = command.substring(firstSlashIndex+4);
+                    String byDate = formatDateFromString(dateString);
+                    return new DeadlineCommand(description,byDate);
+                } catch (StringIndexOutOfBoundsException e){
+                    throw new MissingInputException();
+                }
+                
             case "fixed":
                 firstSlashIndex = command.indexOf("/");
                 description = command.substring(6,firstSlashIndex);
@@ -68,18 +82,30 @@ public class Parser {
                 return new ListCommand();
 
             case "mark":
+                if (inputArray.length!=2){
+                    throw new MissingInputException();
+                }
                 String markIndex = inputArray[1];
-                return new MarkCommand(markIndex);
+                return new MarkCommand(markIndex);          
 
             case "unmark":
+                if (inputArray.length!=2){
+                    throw new MissingInputException();
+                }
                 String unmarkIndex = inputArray[1];
                 return new UnmarkCommand(unmarkIndex);
 
             case "delete":
+                if (inputArray.length!=2){
+                    throw new MissingInputException();
+                }
                 String delIndex = inputArray[1];
                 return new DeleteCommand(delIndex);
 
             case "find":
+                if (inputArray.length!=2){
+                    throw new MissingInputException();
+                }
                 String toFind = inputArray[1];
                 return new FindCommand(toFind);
         }

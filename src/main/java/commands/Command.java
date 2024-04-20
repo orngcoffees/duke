@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.DukeException;
 import storage.Storage;
 import tasklist.*;
 import ui.Ui;
@@ -18,6 +19,6 @@ public class Command{
         return exit;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage){}
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{}
 
 }
