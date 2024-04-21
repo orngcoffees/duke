@@ -6,6 +6,7 @@ import tasklist.*;
 import ui.Ui;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
 * The Duke program implements an application that supports users with task management.
@@ -16,7 +17,7 @@ import java.io.FileNotFoundException;
 * in the Command Line Interface (CLI).
 *
 * @author  orngcoffees
-* @version 2.13
+* @version 2.14
 * @since 2024-04-21
 */
 public class Duke {
@@ -29,15 +30,15 @@ public class Duke {
     * Initialises Storage which is used to store a tasklist,
     * then checks if there is a tasklist inside.
     * If there is no tasklist found, create a new tasklist.
+     * @throws FileNotFoundException 
     */    
-    public Duke(String filePath) {
+    public Duke(String filePath) throws FileNotFoundException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
 
-        } catch (FileNotFoundException e) {
-            ui.printLoadingError();
+        } catch (FileNotFoundException e)  {
             tasks = new TaskList();
         }
     }
@@ -48,7 +49,7 @@ public class Duke {
     * <p>
     * Reads user commands upon initialisation.
     */  
-    public void run() throws DukeException, IllegalIndexNumberException {
+    public void run() throws DukeException, IllegalIndexNumberException,IOException {
         ui.printLogo();
         ui.printHello();
         ui.print("__________________________________________");
@@ -60,25 +61,24 @@ public class Duke {
                 Command c = Parser.parse(response);
                 ui.print("__________________________________________");
                 c.execute(tasks, ui, storage);
+                Storage.save("data/duke.txt", tasks.tasks);
                 ui.print("__________________________________________");
                 exit = c.isExit();
 
             } catch (DukeException e) {
-                ui.print(e.getErrorMessage());
+                //ui.print(e.getErrorMessage());
                 ui.print("__________________________________________");
             } 
         }
 
     }
     /**
-    * The method which runs to check existing storage.
+    * The method which runs to start the process.
+     * @throws IOException 
+     * @throws DukeException 
+     * @throws IllegalIndexNumberException 
     */  
-    public static void main(String[] args) {
-        try {
-            new Duke("../Duke/src/main/java/data/duke.txt").run();
-        } catch (DukeException e) {
-            e.getErrorMessage();
-        }
-
+    public static void main(String[] args) throws IllegalIndexNumberException, DukeException, IOException {
+        new Duke("data/duke.txt").run();
     }
 }

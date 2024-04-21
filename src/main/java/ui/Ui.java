@@ -17,7 +17,7 @@ public class Ui {
         System.out.println(logo);
     }
     public void printLoadingError(){
-        System.out.println("Error loading tasks from file. D:");
+        System.out.println("No tasks from storage file.");
     }
 
     public void printHello() {

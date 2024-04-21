@@ -3,6 +3,7 @@ package storage;
 import tasklist.*;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Storage {
 
     public Storage(String filePath){
         assert filePath!=null : "Filepath cannot be empty.";
-        this.file= new File(filePath);
+        file= new File(filePath);
     }
 
     public File load() {
@@ -34,5 +35,23 @@ public class Storage {
 
         fw.write(textToAppend);
         fw.close();
+    }
+    public static void save(String filePath, ArrayList<Task> taskList) {
+        try {
+            if (!file.exists()) {
+                File f = new File(filePath);
+                if (!f.exists()) {
+                    f.getParentFile().mkdirs();
+                }
+            }
+            FileOutputStream writer = new FileOutputStream(filePath);
+
+            for (Task task : taskList) {
+                writer.write((task.getTaskStorageString() + '\n').getBytes());
+            }
+            writer.close();
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
     }
 }
