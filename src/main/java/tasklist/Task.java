@@ -16,7 +16,8 @@ public class Task {
     }
     /**
      * Checks whether a task is marked done.
-     * If yes, return "X". If no, return " ".
+     * 
+     * @returns String of either "X" or "" which indicates the done state.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); 
@@ -37,7 +38,6 @@ public class Task {
     /**
      * Returns the task in a specific format for printing.
      * For example, the list command which returns the current tasklist to the user.
-     * 
      * @see commands.ListCommand
      */
     public String toString() {

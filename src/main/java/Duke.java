@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 * in the Command Line Interface (CLI).
 *
 * @author  orngcoffees
-* @version 2.10
+* @version 2.11
 * @since 2024-04-21
 */
 public class Duke {

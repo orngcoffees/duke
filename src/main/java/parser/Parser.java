@@ -5,6 +5,7 @@ import exceptions.*;
 import tasklist.Task;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -15,12 +16,24 @@ import java.time.format.DateTimeParseException;
  */
 
 public class Parser {
-    public static String formatDateFromString(String dateString) throws IllegalDateTimeException{
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    public static String formatDateTimeFromString(String dateString) throws IllegalDateTimeException{
+        DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
         try{
-            LocalDateTime deadlineDateTime = LocalDateTime.parse(dateString, formatter);
+            LocalDateTime deadlineDateTime = LocalDateTime.parse(dateString, formatterWithTime);
             return deadlineDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mma"));
+
+        } catch (DateTimeParseException e) {
+            throw new IllegalDateTimeException();
+        }
+
+    }
+    public static String formatDateFromString(String dateString) throws IllegalDateTimeException{
+        DateTimeFormatter formatterWithoutTime = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+        try{
+            LocalDate deadlineDate = LocalDate.parse(dateString, formatterWithoutTime);
+            return deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
         } catch (DateTimeParseException e) {
             throw new IllegalDateTimeException();
@@ -60,7 +73,7 @@ public class Parser {
                 description = command.substring(9,firstSlashIndex);
                 try{
                     dateString = command.substring(firstSlashIndex+4);
-                    String byDate = formatDateFromString(dateString);
+                    String byDate = formatDateTimeFromString(dateString);
                     return new DeadlineCommand(description,byDate);
 
                 } catch (StringIndexOutOfBoundsException e){
@@ -108,6 +121,15 @@ public class Parser {
                 }
                 String toFind = inputArray[1];
                 return new FindCommand(toFind);
+
+            case "schedule":
+            if (inputArray.length!=2){
+                throw new MissingInputException();
+            }
+            String scheduleDate = inputArray[1];
+            scheduleDate = formatDateFromString(scheduleDate);
+
+            return new ScheduleCommand(scheduleDate);
         }
         return null;
     }
