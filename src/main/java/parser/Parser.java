@@ -2,7 +2,7 @@ package parser;
 
 import commands.*;
 import exceptions.*;
-import tasklist.Task;
+
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -16,6 +16,10 @@ import java.time.format.DateTimeParseException;
  */
 
 public class Parser {
+    /**
+     * Format DateTime: user input string from d/MM/yyyy HHmm to MMM d yyyy hh:mma.
+     * 
+     */
     public static String formatDateTimeFromString(String dateString) throws IllegalDateTimeException{
         DateTimeFormatter formatterWithTime = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
@@ -28,7 +32,11 @@ public class Parser {
         }
 
     }
-    public static String formatDateFromString(String dateString) throws IllegalDateTimeException{
+    /**
+     * Format Date: user input string from d/MM/yyyy to MMM d yyyy.
+     * 
+     */
+    public static String formatDateFromString(String dateString) throws IllegalDateException{
         DateTimeFormatter formatterWithoutTime = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
         try{
@@ -36,11 +44,11 @@ public class Parser {
             return deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
         } catch (DateTimeParseException e) {
-            throw new IllegalDateTimeException();
+            throw new IllegalDateException();
         }
 
     }
-    public static Command parse(String command) throws MissingInputException, IllegalDateTimeException, IllegalIndexException {
+    public static Command parse(String command) throws MissingInputException, IllegalDateTimeException, IllegalIndexNumberException, IllegalDateException,WrongDeadineFormatException, WrongCommandException, IllegalIndexFormatException {
         String description;
         String startsAt;
         String endsAt;
@@ -49,7 +57,6 @@ public class Parser {
         String[] inputArray = command.split(" ");
         String identifier = inputArray[0];
         assert !identifier.isEmpty(): "Command cannot be empty";
-
         switch (identifier) {
             case "":
                 throw new MissingInputException();
@@ -69,13 +76,17 @@ public class Parser {
                 return new EventCommand(description,startsAt,endsAt);
 
             case "deadline":
-                firstSlashIndex = command.indexOf("/");
-                description = command.substring(9,firstSlashIndex);
+                try{
+                    firstSlashIndex = command.indexOf("/");
+                    description = command.substring(9,firstSlashIndex);
+                } catch (StringIndexOutOfBoundsException e){
+                    throw new WrongDeadineFormatException();
+                }
+                
                 try{
                     dateString = command.substring(firstSlashIndex+4);
                     String byDate = formatDateTimeFromString(dateString);
                     return new DeadlineCommand(description,byDate);
-
                 } catch (StringIndexOutOfBoundsException e){
                     throw new MissingInputException();
                 }
@@ -130,8 +141,9 @@ public class Parser {
             scheduleDate = formatDateFromString(scheduleDate);
 
             return new ScheduleCommand(scheduleDate);
+
+            default: throw new WrongCommandException();
         }
-        return null;
     }
 
 }

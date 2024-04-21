@@ -1,4 +1,4 @@
-T | 0 | send party invitations
+T | 1 | send party invitations
 D | 1 | confirm guest reservations  | May 5 2024 06:00pm
 E | 0 | my birthday party  | Aug 6th 2pm 4pm
 F | 0 | review lecture notes  | 2 hours

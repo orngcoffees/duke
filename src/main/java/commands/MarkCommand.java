@@ -17,18 +17,22 @@ import exceptions.*;
 public class MarkCommand extends Command{
     int markIndex;
 
-    public MarkCommand(String index){
-        markIndex = Integer.parseInt(index)-1;
+    public MarkCommand(String index) throws IllegalIndexFormatException{
+        try{
+            markIndex = Integer.parseInt(index)-1;
+        } catch (NumberFormatException e){
+            throw new IllegalIndexFormatException();
+        }
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IllegalIndexException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IllegalIndexNumberException {
         try{
             Task markedTask = tasks.tasks.get(markIndex);
             markedTask.markDone();
             ui.print("Nice! I've marked this task as done:\n"+markedTask.toString());
         } catch (IndexOutOfBoundsException e){
-            throw new IllegalIndexException();
-        }
+            throw new IllegalIndexNumberException();
+        } 
 
         try {
             storage.writeToFile(tasks.tasks);

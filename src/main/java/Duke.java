@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 * in the Command Line Interface (CLI).
 *
 * @author  orngcoffees
-* @version 2.11
+* @version 2.12
 * @since 2024-04-21
 */
 public class Duke {
@@ -48,7 +48,7 @@ public class Duke {
     * <p>
     * Reads user commands upon initialisation.
     */  
-    public void run() throws DukeException, IllegalIndexException {
+    public void run() throws DukeException, IllegalIndexNumberException {
         ui.printLogo();
         ui.printHello();
         ui.print("__________________________________________");
