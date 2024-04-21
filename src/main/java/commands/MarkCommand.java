@@ -16,7 +16,13 @@ import exceptions.*;
 
 public class MarkCommand extends Command{
     int markIndex;
-
+    /**
+     * Converts the index of the task to be marked
+     * from String (input by user) to an Integer.
+     * 
+     * @param markIndex The index of the task to be marked completed.
+     * @exception IllegalIndexFormatException
+     */
     public MarkCommand(String index) throws IllegalIndexFormatException{
         try{
             markIndex = Integer.parseInt(index)-1;
@@ -24,6 +30,13 @@ public class MarkCommand extends Command{
             throw new IllegalIndexFormatException();
         }
     }
+    /**
+     * Mark a task as done.
+     * 
+     * @param markIndex The index of the task to be marked completed.
+     * @param markedTask The actual task to change the isDone state for.
+     * @exception IllegalIndexNumberException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IllegalIndexNumberException {
         try{

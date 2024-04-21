@@ -4,13 +4,28 @@ import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
 
+/**
+ * Represents a specific command to list the schedule for a given date.
+ * Applies to deadlines only.
+ * 
+ * @param scheduleDate The date to show the schedule for.
+ * 
+ * @see Command
+ */
+
 public class ScheduleCommand extends Command {
     String scheduleDate;
 
     public ScheduleCommand(String scheduleDate){
         this.scheduleDate=scheduleDate;
         }
-
+    /**
+     * Search for task with matching date and store in tasksFound.
+     * Then, loop through the list and print them out to user.
+     * 
+     * @param tasksFound The list of tasks found.
+     * @param scheduleDate The date to search and show the schedule for.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
         TaskList tasksFound = new TaskList();
