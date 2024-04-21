@@ -35,6 +35,7 @@ public class Parser {
 
         String[] inputArray = command.split(" ");
         String identifier = inputArray[0];
+        assert !identifier.isEmpty(): "Command cannot be empty";
 
         switch (identifier) {
             case "":
@@ -42,9 +43,6 @@ public class Parser {
 
             case "todo":
                 description = command.split("todo ")[1];
-                if (description.length()==0){
-                    throw new IndexOutOfBoundsException("! The description of a todo cannot be empty.");
-                }
                 return new TodoCommand(description);
 
             case "event":
@@ -64,6 +62,7 @@ public class Parser {
                     dateString = command.substring(firstSlashIndex+4);
                     String byDate = formatDateFromString(dateString);
                     return new DeadlineCommand(description,byDate);
+
                 } catch (StringIndexOutOfBoundsException e){
                     throw new MissingInputException();
                 }
@@ -92,6 +91,7 @@ public class Parser {
                 if (inputArray.length!=2){
                     throw new MissingInputException();
                 }
+                assert (inputArray[1].matches("-?\\d+(\\d+)?")):"Index must be positive integer";
                 String unmarkIndex = inputArray[1];
                 return new UnmarkCommand(unmarkIndex);
 

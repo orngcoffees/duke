@@ -17,6 +17,7 @@ public class Storage {
     private static File file;
 
     public Storage(String filePath){
+        assert filePath!=null : "Filepath cannot be empty.";
         this.file= new File(filePath);
     }
 

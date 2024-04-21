@@ -16,12 +16,12 @@ import exceptions.*;
 
 public class MarkCommand extends Command{
     int markIndex;
+
     public MarkCommand(String index){
         markIndex = Integer.parseInt(index)-1;
     }
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IllegalIndexException {
-        
         try{
             Task markedTask = tasks.tasks.get(markIndex);
             markedTask.markDone();

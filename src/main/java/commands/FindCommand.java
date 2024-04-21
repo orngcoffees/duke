@@ -28,6 +28,8 @@ public class FindCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage){
         TaskList tasksFound = new TaskList();
         int i=0;
+        assert tasks.tasks.size()!=0: "Tasklist should not be empty. Nothing to search.";
+        
         while (i<tasks.tasks.size()){
             String toSearch=tasks.tasks.get(i).toString();
 

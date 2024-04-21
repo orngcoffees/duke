@@ -17,10 +17,12 @@ public class UnmarkCommand extends Command{
     int unmarkIndex;
 
     public UnmarkCommand(String index){
+        assert (index.matches("-?\\d+(\\d+)?")):"index must be positive integer.";
         unmarkIndex=Integer.parseInt(index)-1;
     }
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task unmarkedTask = tasks.tasks.get(unmarkIndex);
+        assert unmarkedTask.isDone:"Cannot unmark an undone task.";
         unmarkedTask.unmarkDone();
         ui.print("OK, I've marked this task as not done yet:\n"+unmarkedTask.toString());
         
