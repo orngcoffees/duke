@@ -17,7 +17,7 @@ import java.io.IOException;
 * in the Command Line Interface (CLI).
 *
 * @author  orngcoffees
-* @version 2.14
+* @version 2.15
 * @since 2024-04-21
 */
 public class Duke {
@@ -66,7 +66,7 @@ public class Duke {
                 exit = c.isExit();
 
             } catch (DukeException e) {
-                //ui.print(e.getErrorMessage());
+                ui.print(e.getErrorMessage());
                 ui.print("__________________________________________");
             } 
         }

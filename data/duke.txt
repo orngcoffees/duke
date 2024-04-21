@@ -4,3 +4,5 @@ E | 0 | my birthday party  | Aug 6th 2pm 4pm
 F | 0 | review lecture notes  | 2 hours
 T | 0 | study for week 9 quiz
 D | 0 | submit project report  | Jun 30 2024 11:59pm
+F | 0 | legs workout at gym  | 3 hours
+D | 0 | submit source code  | May 5 2024 11:59pm
